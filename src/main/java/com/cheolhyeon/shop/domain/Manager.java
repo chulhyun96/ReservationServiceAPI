@@ -23,11 +23,11 @@ public class Manager implements UserDetails {
     @Column(name = "manager_id")
     private Long id;
     private String name;
-    private String email;
     private String password;
+    private String email;
     private String phone;
 
-    @ElementCollection
+    @Transient
     private List<String> roles;
 
     @Override
