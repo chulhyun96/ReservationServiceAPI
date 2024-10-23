@@ -1,5 +1,5 @@
 package com.cheolhyeon.shop.type;
 
-public enum AutorizationType {
+public enum UserRole {
     ADMIN,CUSTOMER
 }

@@ -1,6 +1,6 @@
 package com.cheolhyeon.shop.domain;
 
-import com.cheolhyeon.shop.type.ApplicationRole;
+import com.cheolhyeon.shop.type.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +21,5 @@ public class User {
     private String password;
     private String email;
     private String phone;
-    private ApplicationRole role;
+    private UserRole role;
 }
