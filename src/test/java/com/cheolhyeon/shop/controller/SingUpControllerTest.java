@@ -28,9 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 class SingUpControllerTest {
     @Autowired
-    SingUpService singUpService;
-
-    @Autowired
     WebApplicationContext context;
 
     @Autowired
@@ -49,7 +46,7 @@ class SingUpControllerTest {
         //given
         final String url = "/signin";
         SignUpAdmin.Request managerA = SignUpAdmin.Request.builder()
-                .username("managerZ")
+                .username("managerA")
                 .password("1234")
                 .phone("010342342345")
                 .email("test@naver.com")
@@ -61,11 +58,7 @@ class SingUpControllerTest {
         ResultActions result = mockMvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody));
-
-        Member register = singUpService.register(managerA);
-        System.out.println(register.getUsername());
         //then
         result.andExpect(status().isOk());
     }
-
 }
