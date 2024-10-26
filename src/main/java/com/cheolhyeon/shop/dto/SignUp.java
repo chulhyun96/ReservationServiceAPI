@@ -3,14 +3,18 @@ package com.cheolhyeon.shop.dto;
 import com.cheolhyeon.shop.domain.Member;
 import com.cheolhyeon.shop.type.SignUpStatus;
 import com.cheolhyeon.shop.type.UserRole;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.nio.file.attribute.UserPrincipal;
 
-public class SignUpAdmin {
+
+public class SignUp {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
@@ -20,11 +24,16 @@ public class SignUpAdmin {
         private String password;
         private String email;
         private String phone;
+
+        @Enumerated(EnumType.STRING)
         private UserRole userRole;
 
-        public void setUpAdminInfo(PasswordEncoder passwordEncoder) {
-            this.password = passwordEncoder.encode(this.password);
-            this.userRole = UserRole.ADMIN;
+        public void setUpAdminInfo(PasswordEncoder passwordEncoder, UserRole role) {
+            this.password = passwordEncoder.encode(password);
+            this.userRole = role;
+        }
+        public String getUserRoleAsString() {
+            return userRole.name().toLowerCase();
         }
     }
     @NoArgsConstructor
@@ -37,8 +46,8 @@ public class SignUpAdmin {
         private SignUpStatus status;
     }
 
-    public static SignUpAdmin.Response toResponse(Member saveMember) {
-        return SignUpAdmin.Response.builder()
+    public static SignUp.Response toResponse(Member saveMember) {
+        return SignUp.Response.builder()
                 .name(saveMember.getUsername())
                 .email(saveMember.getEmail())
                 .status(SignUpStatus.SUCCESS)
