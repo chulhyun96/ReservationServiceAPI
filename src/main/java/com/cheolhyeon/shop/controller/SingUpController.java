@@ -1,6 +1,6 @@
 package com.cheolhyeon.shop.controller;
 
-import com.cheolhyeon.shop.dto.SignUpAdmin;
+import com.cheolhyeon.shop.dto.SignUp;
 import com.cheolhyeon.shop.service.SingUpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +12,9 @@ public class SingUpController {
     private final SingUpService singUpService;
 
     @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestBody SignUpAdmin.Request request) {
+    public ResponseEntity<?> singUp(@RequestBody SignUp.Request request) {
         return ResponseEntity.ok().body(
-                SignUpAdmin.toResponse(singUpService.register(request))
+                SignUp.toResponse(singUpService.register(request))
         );
     }
 }

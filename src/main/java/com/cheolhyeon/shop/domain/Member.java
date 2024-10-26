@@ -1,6 +1,6 @@
 package com.cheolhyeon.shop.domain;
 
-import com.cheolhyeon.shop.dto.SignUpAdmin;
+import com.cheolhyeon.shop.dto.SignUp;
 import com.cheolhyeon.shop.type.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,7 +27,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    public static Member fromRequest(SignUpAdmin.Request request) {
+    public static Member fromRequest(SignUp.Request request) {
         return Member.builder()
                 .username(request.getUsername())
                 .password(request.getPassword())

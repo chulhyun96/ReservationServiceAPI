@@ -1,11 +1,8 @@
 package com.cheolhyeon.shop.controller;
 
-import com.cheolhyeon.shop.domain.Member;
-import com.cheolhyeon.shop.dto.SignUpAdmin;
-import com.cheolhyeon.shop.service.SingUpService;
+import com.cheolhyeon.shop.dto.SignUp;
 import com.cheolhyeon.shop.type.UserRole;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,15 +39,15 @@ class SingUpControllerTest {
     }
     @Test
     @DisplayName("회원가입 성공")
-    void signin_success() throws Exception {
+    void signin_Manager_success() throws Exception {
         //given
         final String url = "/signin";
-        SignUpAdmin.Request managerA = SignUpAdmin.Request.builder()
+        SignUp.Request managerA = SignUp.Request.builder()
                 .username("managerA")
                 .password("1234")
                 .phone("010342342345")
                 .email("test@naver.com")
-                .userRole(UserRole.ADMIN)
+                .userRole(UserRole.MANAGER)
                 .build();
 
         String requestBody = mapper.writeValueAsString(managerA);
