@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(SignUpException.class)
     public ErrorResponse handleSignUpException(SignUpException e) {
-        log.error("[Error] = {}{}", e.getErrorCode(), e.getMessage());
+        log.error("[ERROR] = {}{}", e.getErrorCode(), e.getMessage());
         return new ErrorResponse(e.getErrorCode(), e.getMessage());
     }
 }
