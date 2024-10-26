@@ -1,7 +1,7 @@
 package com.cheolhyeon.shop.dto;
 
 import com.cheolhyeon.shop.domain.Member;
-import com.cheolhyeon.shop.type.SignUpStatus;
+import com.cheolhyeon.shop.type.AuthStatus;
 import com.cheolhyeon.shop.type.UserRole;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -10,8 +10,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.nio.file.attribute.UserPrincipal;
 
 
 public class SignUp {
@@ -43,14 +41,14 @@ public class SignUp {
     public static class Response {
         private String name;
         private String email;
-        private SignUpStatus status;
-    }
+        private AuthStatus status;
 
-    public static SignUp.Response toResponse(Member saveMember) {
-        return SignUp.Response.builder()
-                .name(saveMember.getUsername())
-                .email(saveMember.getEmail())
-                .status(SignUpStatus.SUCCESS)
-                .build();
+        public static SignUp.Response fromEntity(Member saveMember) {
+            return SignUp.Response.builder()
+                    .name(saveMember.getUsername())
+                    .email(saveMember.getEmail())
+                    .status(AuthStatus.SUCCESS)
+                    .build();
+        }
     }
 }

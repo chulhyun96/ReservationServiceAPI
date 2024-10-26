@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(SignUpException.class)
-    public ErrorResponse handleSignUpException(SignUpException e) {
+    @ExceptionHandler(AuthException.class)
+    public ErrorResponse handleSignUpException(AuthException e) {
         log.error("[ERROR] = {}{}", e.getErrorCode(), e.getMessage());
         return new ErrorResponse(e.getErrorCode(), e.getMessage());
     }
