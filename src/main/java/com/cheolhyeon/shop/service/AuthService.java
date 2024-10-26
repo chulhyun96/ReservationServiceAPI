@@ -17,7 +17,7 @@ import static com.cheolhyeon.shop.type.ErrorCode.ALREADY_EXIST;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class SingUpService {
+public class AuthService {
     private final ManagerRepository managerRepository;
     private final PasswordEncoder passwordEncoder;
 
