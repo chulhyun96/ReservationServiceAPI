@@ -1,6 +1,7 @@
 package com.cheolhyeon.shop.controller;
 
 import com.cheolhyeon.shop.dto.SignUp;
+import com.cheolhyeon.shop.dto.SignIn;
 import com.cheolhyeon.shop.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,13 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> singUp(@RequestBody SignUp.Request request) {
         return ResponseEntity.ok().body(
-                SignUp.toResponse(authService.register(request))
+                SignUp.Response.fromEntity(authService.register(request))
         );
+    }
+      @GetMapping("/signin")
+    public ResponseEntity<?> signin(@RequestBody SignIn.Request request) {
+          return ResponseEntity.ok().body(
+                  SignIn.Response.fromEntity(authService.signin(request))
+          );
     }
 }
