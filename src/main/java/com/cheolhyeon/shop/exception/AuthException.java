@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-public class SignUpException extends RuntimeException {
+public class AuthException extends RuntimeException {
     private ErrorCode errorCode;
     private String message;
 
-    public SignUpException(ErrorCode errorCode) {
+    public AuthException(ErrorCode errorCode) {
         super(errorCode.getMessage());
         this.errorCode = errorCode;
         this.message = errorCode.getMessage();
