@@ -1,6 +1,7 @@
 package com.cheolhyeon.shop.dto;
 
-import com.cheolhyeon.shop.type.LoginStatus;
+import com.cheolhyeon.shop.domain.Member;
+import com.cheolhyeon.shop.type.AuthStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +15,7 @@ public class SignIn {
     public static class Request {
         private String username;
         private String password;
-        private LoginStatus loginStatus;
+        private AuthStatus authStatus;
 
     }
     @NoArgsConstructor
@@ -23,6 +24,13 @@ public class SignIn {
     @Getter
     public static class Response {
         private String username;
-        private LoginStatus loginStatus;
+        private AuthStatus authStatus;
+
+        public static Response fromEntity(Member member) {
+            return Response.builder()
+                    .username(member.getUsername())
+                    .authStatus(AuthStatus.SUCCESS)
+                    .build();
+        }
     }
 }
