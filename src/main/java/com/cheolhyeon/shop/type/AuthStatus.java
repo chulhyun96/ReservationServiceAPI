@@ -1,5 +1,5 @@
 package com.cheolhyeon.shop.type;
 
-public enum LoginStatus {
+public enum AuthStatus {
     SUCCESS,FAIL
 }
