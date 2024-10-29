@@ -1,6 +1,9 @@
 package com.cheolhyeon.shop.controller;
 
+import com.cheolhyeon.shop.domain.Member;
+import com.cheolhyeon.shop.dto.SignIn;
 import com.cheolhyeon.shop.dto.SignUp;
+import com.cheolhyeon.shop.service.AuthService;
 import com.cheolhyeon.shop.type.UserRole;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,14 +19,19 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
 class SingUpControllerTest {
+    @Autowired
+    AuthService authService;
+
     @Autowired
     WebApplicationContext context;
 
@@ -41,7 +49,7 @@ class SingUpControllerTest {
     @DisplayName("회원가입 성공")
     void signin_Manager_success() throws Exception {
         //given
-        final String url = "/signin";
+        final String url = "/signup";
         SignUp.Request managerA = SignUp.Request.builder()
                 .username("managerA")
                 .password("1234")
@@ -51,10 +59,39 @@ class SingUpControllerTest {
                 .build();
 
         String requestBody = mapper.writeValueAsString(managerA);
+
         //when
         ResultActions result = mockMvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody));
+
+        //then
+        result.andExpect(status().isCreated());
+    }
+    @Test
+    @DisplayName("로그인 성공")
+    void doTest() throws Exception {
+        //given
+        SignUp.Request managerA = SignUp.Request.builder()
+                .username("managerA")
+                .password("1234")
+                .phone("010342342345")
+                .email("test@naver.com")
+                .userRole(UserRole.MANAGER)
+                .build();
+
+        Member register = authService.register(managerA);
+
+        SignIn.Request signInRequest = SignIn.Request.builder()
+                .username(register.getUsername())
+                .password("1234")
+                .build();
+
+        //when
+        ResultActions result = mockMvc.perform(get("/signin")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(signInRequest)));
+
         //then
         result.andExpect(status().isOk());
     }
