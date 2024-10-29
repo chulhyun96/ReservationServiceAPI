@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(AuthException.class)
     public ErrorResponse handleSignUpException(AuthException e) {
-        log.error("[ERROR] = {}{}", e.getErrorCode(), e.getMessage());
+        log.error("[ERROR] = {} {}", e.getErrorCode(), e.getMessage());
         return new ErrorResponse(e.getMessage(), AuthStatus.FAIL, HttpStatus.BAD_REQUEST.value());
     }
 }

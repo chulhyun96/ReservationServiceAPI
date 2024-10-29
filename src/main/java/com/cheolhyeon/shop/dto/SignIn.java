@@ -15,8 +15,6 @@ public class SignIn {
     public static class Request {
         private String username;
         private String password;
-        private AuthStatus authStatus;
-
     }
     @NoArgsConstructor
     @AllArgsConstructor
